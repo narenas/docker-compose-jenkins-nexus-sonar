@@ -2,7 +2,7 @@ version: '2'
 
 networks:
   devnet:
-    driver: bridge
+#    driver: bridge
 
 services:
  nexus:
@@ -13,10 +13,10 @@ services:
   networks:
     - devnet
   volumes:
-    - "/opt/nexus/:/var/lib/nexus"
+    - "/$PWD/nexus/:/var/lib/nexus"
 
  jenkins:
-  image: jenkins
+  image: jenkins/jenkins
   container_name: jenkins
   ports:
     - "8080:8080"
@@ -42,7 +42,7 @@ services:
    - SONARQUBE_JDBC_USERNAME=sonar
    - SONARQUBE_JDBC_PASSWORD=sonar
   volumes:
-    - "/opt/sonar/:/var/lib/sonar"
+    - "/$PWD/sonar/:/var/lib/sonar"
 
  sonardb:
   networks:
@@ -57,7 +57,7 @@ services:
   ports:
     - "5432:5432"
   volumes:
-    - "/opt/postgres:/var/lib/postgresql"
+    - "/$PWD/postgres:/var/lib/postgresql"
 
  cadvisor:
   image: google/cadvisor
